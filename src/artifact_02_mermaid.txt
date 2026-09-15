@@ -1,0 +1,61 @@
+flowchart TD
+    %% Global Styling
+    classDef userClass fill:#1E293B,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC;
+    classDef pdaClass fill:#0F172A,stroke:#818CF8,stroke-width:2px,color:#F8FAFC;
+    classDef cpiClass fill:#311042,stroke:#C084FC,stroke-width:2px,color:#F8FAFC;
+    classDef guardClass fill:#450A0A,stroke:#F87171,stroke-width:2px,color:#F8FAFC;
+    classDef tokenClass fill:#064E3B,stroke:#34D399,stroke-width:2px,color:#F8FAFC;
+
+    subgraph ClientLayer ["Client & Builder Interaction Layer"]
+        Builder["Builder Identity (Signer)"]:::userClass
+        Peer["Peer Evaluator (Signer)"]:::userClass
+        Admin["Colosseum Authority / Multisig"]:::userClass
+    end
+
+    subgraph ProgramBoundary ["colosseum_reflect Program (Anchor Core)"]
+        subgraph StateAccounts ["On-Chain PDAs & Storage"]
+            GlobalConfig["Global Config PDA<br/>['config']<br/>- Admin Pubkey<br/>- Slashing Rate<br/>- Epoch State"]:::pdaClass
+            ProjectAccount["Project PDA<br/>['project', authority]<br/>- Repo Hash<br/>- Milestone Index<br/>- Total Conviction"]:::pdaClass
+            MilestoneAccount["Milestone PDA<br/>['milestone', project, id]<br/>- Git Commit Root<br/>- Benchmark Metric<br/>- Status: Committed/Verified"]:::pdaClass
+            AttestationAccount["Attestation PDA<br/>['attest', milestone, peer]<br/>- Staked Lamports<br/>- Conviction Weight<br/>- Epoch Timestamp"]:::pdaClass
+            EscrowVault["Protocol Vault PDA<br/>['vault', project]<br/>- Staked Lamports Pool"]:::pdaClass
+        end
+
+        subgraph InstructionHandlers ["Instruction Execution & Security Guards"]
+            InitProject["initialize_project()"]
+            SubmitMilestone["submit_milestone_reflection()"]
+            AttestMilestone["attest_peer_milestone()"]
+            FinalizeMilestone["finalize_and_mint_sbt()"]
+            SlashFraud["slash_fraudulent_milestone()"]
+            
+            SecurityGuards{"Security Validation Guards<br/>1. Signer == Project Authority?<br/>2. Window Open (clock.unix_timestamp)?<br/>3. Anti-Self Attestation (Peer != Builder)?<br/>4. PDA Bump Integrity Valid?"}:::guardClass
+        end
+    end
+
+    subgraph ExternalCPI ["Solana Ecosystem CPI Layer"]
+        Token2022["SPL Token-2022 Program<br/>(Extensions: Non-Transferable, Metadata)"]:::cpiClass
+        SystemProgram["System Program<br/>(Account Allocation & Lamport Transfers)"]:::cpiClass
+        BuilderSBT["Soulbound Badge Mint<br/>(Dynamic Proof-of-Reflection SBT)"]:::tokenClass
+    end
+
+    %% Flow Paths
+    Builder -->|1. Register Project| InitProject
+    InitProject -->|Seeds Check & PDA Creation| ProjectAccount
+    InitProject --> SystemProgram
+
+    Builder -->|2. Commit Reflection & Proof| SubmitMilestone
+    SubmitMilestone --> SecurityGuards
+    SecurityGuards -->|Valid| MilestoneAccount
+
+    Peer -->|3. Stake & Attest Progress| AttestMilestone
+    AttestMilestone --> SecurityGuards
+    SecurityGuards -->|Compute Conviction| AttestationAccount
+    AttestMilestone -->|Escrow Stake| EscrowVault
+
+    Builder -->|4. Finalize Verified Milestone| FinalizeMilestone
+    FinalizeMilestone --> SecurityGuards
+    FinalizeMilestone -->|CPI: Mint To Builder| Token2022
+    Token2022 -->|Emit Immutable Token| BuilderSBT
+
+    Admin -->|5. Execute Slashing on Plagiarism| SlashFraud
+    SlashFraud -->|Transfer Slashed Stake| EscrowVault
