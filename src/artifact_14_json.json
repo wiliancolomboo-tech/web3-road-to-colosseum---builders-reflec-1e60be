@@ -1,0 +1,7 @@
+{
+    "status": "UP",
+    "rpc": "https://api.devnet.solana.com",
+    "program": "Chron1c1e11111111111111111111111111111111111",
+    "events_processed": 142,
+    "timestamp": "2025-02-15T12:00:00.000Z"
+  }

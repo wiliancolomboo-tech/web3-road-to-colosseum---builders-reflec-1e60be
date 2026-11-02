@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  telemetry-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: colosseum-reflect-worker
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - PROGRAM_ID=RefL1ectXyZ8vN3b9o42A6o8K9zYFk1bC7vWc6M7col
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - VENTURE_RECIPIENT_EMAIL=${VENTURE_RECIPIENT_EMAIL}
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

@@ -1,0 +1,7 @@
+3/ The builders who reflect, adapt, and share are the ones who launch generation-defining protocols on @solana.
+
+Explore the code, deploy the Dockerized relay, and verify your hackathon journey:
+🔗 GitHub: github.com/colosseum-org/colosseum-chronicle
+🔗 Explorer: explorer.solana.com/address/ChrncLEvE8z9fK2F8Lw4U9n6W3B2V7mD1G8pQ5yT4rA?cluster=devnet
+
+See you in the Arena! 🏟️🚀

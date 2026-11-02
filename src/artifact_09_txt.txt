@@ -1,0 +1,5 @@
+Hackathon judging is broken. 500 teams, 48 hours, and 3-minute pitch decks that mask true engineering reality.
+
+What if your hackathon journey was cryptographically verifiable on @solana?
+
+Introducing ColosseumLog: An on-chain proof-of-builder-journey protocol for @Colosseum. 🧵👇

@@ -1,263 +1,133 @@
 use anchor_lang::prelude::*;
-use anchor_spl::token_interface::{mint_to, MintTo, Token2022, TokenAccount, Mint};
 
-declare_id!("RefL7vP6dZ3m14fWw5F8pGjUuYk2B4x9s8VnMqQk7X1");
+declare_id!("ChrncLE7kYd3ZUXxWz3C3rW2Lq2TKn8u1E9V3X5vYFzM");
 
-pub const MAX_METADATA_LEN: usize = 128;
-pub const MAX_HASH_LEN: usize = 32;
-pub const CONVICTION_SCALE: u64 = 1_000_000;
-pub const MIN_ATTESTATION_STAKE: u64 = 50_000_000; // 0.05 SOL
+pub const MAX_NAME_LEN: usize = 64;
+pub const MAX_PROJECT_LEN: usize = 64;
+pub const MAX_URI_LEN: usize = 128;
+pub const MAX_SUMMARY_LEN: usize = 280;
 
 #[program]
-pub mod colosseum_reflect {
+pub mod colosseum_chronicle {
     use super::*;
 
-    /// Initialize the global protocol parameters and fee destination
-    pub fn initialize_protocol(
-        ctx: Context<InitializeProtocol>,
-        slashing_penalty_bps: u16,
-        conviction_halflife_seconds: i64,
+    /// Initializes a builder's root profile on-chain.
+    pub fn initialize_builder_profile(
+        ctx: Context<InitializeBuilderProfile>,
+        name: String,
+        project_name: String,
+        metadata_uri: String,
     ) -> Result<()> {
-        require!(slashing_penalty_bps <= 10_000, ReflectError::InvalidBps);
-        require!(conviction_halflife_seconds > 0, ReflectError::InvalidHalfLife);
+        require!(name.len() > 0 && name.len() <= MAX_NAME_LEN, ChronicleError::StringOutOfBounds);
+        require!(project_name.len() > 0 && project_name.len() <= MAX_PROJECT_LEN, ChronicleError::StringOutOfBounds);
+        require!(metadata_uri.len() <= MAX_URI_LEN, ChronicleError::StringOutOfBounds);
 
-        let config = &mut ctx.accounts.global_config;
-        config.authority = ctx.accounts.authority.key();
-        config.treasury = ctx.accounts.treasury.key();
-        config.slashing_penalty_bps = slashing_penalty_bps;
-        config.conviction_halflife_seconds = conviction_halflife_seconds;
-        config.total_projects = 0;
-        config.bump = ctx.bumps.global_config;
+        let profile = &mut ctx.accounts.profile;
+        let clock = Clock::get()?;
 
-        emit!(ProtocolInitializedEvent {
-            authority: config.authority,
-            slashing_penalty_bps,
-            timestamp: Clock::get()?.unix_timestamp,
+        profile.authority = ctx.accounts.authority.key();
+        profile.name = name;
+        profile.project_name = project_name;
+        profile.metadata_uri = metadata_uri;
+        profile.milestone_count = 0;
+        profile.total_attestations = 0;
+        profile.created_at = clock.unix_timestamp;
+        profile.bump = ctx.bumps.profile;
+
+        emit!(BuilderProfileInitialized {
+            builder: profile.authority,
+            project_name: profile.project_name.clone(),
+            timestamp: profile.created_at,
         });
 
         Ok(())
     }
 
-    /// Register a hackathon project profile
-    pub fn initialize_project(
-        ctx: Context<InitializeProject>,
-        project_slug: String,
-        repo_hash: [u8; 32],
+    /// Records an immutable retrospective milestone with cryptographic proof hashes.
+    pub fn record_milestone(
+        ctx: Context<RecordMilestone>,
+        title: String,
+        summary: String,
+        proof_hash: [u8; 32],
+        category: u8,
+        hours_invested: u16,
     ) -> Result<()> {
-        require!(project_slug.len() <= 32, ReflectError::SlugTooLong);
+        require!(title.len() > 0 && title.len() <= MAX_NAME_LEN, ChronicleError::StringOutOfBounds);
+        require!(summary.len() > 0 && summary.len() <= MAX_SUMMARY_LEN, ChronicleError::StringOutOfBounds);
+        require!(category <= 4, ChronicleError::InvalidMilestoneCategory);
 
-        let project = &mut ctx.accounts.project;
-        project.authority = ctx.accounts.authority.key();
-        project.project_slug = project_slug.clone();
-        project.repo_hash = repo_hash;
-        project.milestone_count = 0;
-        project.total_accumulated_conviction = 0;
-        project.bump = ctx.bumps.project;
-
-        let config = &mut ctx.accounts.global_config;
-        config.total_projects = config.total_projects.checked_add(1).ok_or(ReflectError::MathOverflow)?;
-
-        emit!(ProjectRegisteredEvent {
-            project_key: project.key(),
-            authority: project.authority,
-            slug: project_slug,
-            timestamp: Clock::get()?.unix_timestamp,
-        });
-
-        Ok(())
-    }
-
-    /// Builder submits a concrete milestone reflection and git commit root
-    pub fn submit_milestone(
-        ctx: Context<SubmitMilestone>,
-        milestone_index: u32,
-        commit_root: [u8; 32],
-        reflection_uri: String,
-        expected_deliverable_hash: [u8; 32],
-    ) -> Result<()> {
-        require!(reflection_uri.len() <= MAX_METADATA_LEN, ReflectError::UriTooLong);
-        
-        let project = &mut ctx.accounts.project;
-        require_keys_eq!(project.authority, ctx.accounts.authority.key(), ReflectError::Unauthorized);
-        require_eq!(milestone_index, project.milestone_count, ReflectError::InvalidMilestoneSequence);
-
+        let profile = &mut ctx.accounts.profile;
         let milestone = &mut ctx.accounts.milestone;
-        milestone.project = project.key();
-        milestone.milestone_index = milestone_index;
-        milestone.commit_root = commit_root;
-        milestone.expected_deliverable_hash = expected_deliverable_hash;
-        milestone.reflection_uri = reflection_uri.clone();
-        milestone.submission_timestamp = Clock::get()?.unix_timestamp;
-        milestone.conviction_score = 0;
-        milestone.total_staked_lamports = 0;
-        milestone.status = MilestoneStatus::Submitted;
+        let clock = Clock::get()?;
+
+        milestone.profile = profile.key();
+        milestone.index = profile.milestone_count;
+        milestone.title = title;
+        milestone.summary = summary;
+        milestone.proof_hash = proof_hash;
+        milestone.category = category;
+        milestone.hours_invested = hours_invested;
+        milestone.attestation_count = 0;
+        milestone.created_at = clock.unix_timestamp;
         milestone.bump = ctx.bumps.milestone;
 
-        project.milestone_count = project.milestone_count.checked_add(1).ok_or(ReflectError::MathOverflow)?;
+        profile.milestone_count = profile
+            .milestone_count
+            .checked_add(1)
+            .ok_or(ChronicleError::NumericalOverflow)?;
 
-        emit!(MilestoneSubmittedEvent {
-            project: project.key(),
-            milestone_index,
-            commit_root,
-            reflection_uri,
-            timestamp: milestone.submission_timestamp,
+        emit!(MilestonePublished {
+            builder: profile.authority,
+            profile: profile.key(),
+            milestone_index: milestone.index,
+            proof_hash,
+            category,
+            timestamp: milestone.created_at,
         });
 
         Ok(())
     }
 
-    /// Peer builder stakes SOL to attest to milestone veracity and technical excellence
-    pub fn attest_peer_milestone(
-        ctx: Context<AttestPeerMilestone>,
-        stake_lamports: u64,
+    /// Mentors or peers evaluate and attest to a recorded retrospective milestone.
+    pub fn attest_milestone(
+        ctx: Context<AttestMilestone>,
+        score: u8,
+        feedback: String,
     ) -> Result<()> {
-        require!(stake_lamports >= MIN_ATTESTATION_STAKE, ReflectError::InsufficientStake);
-        
-        let project = &ctx.accounts.project;
-        let peer = ctx.accounts.peer.key();
-        require_keys_neq!(project.authority, peer, ReflectError::SelfAttestationForbidden);
-
-        let milestone = &mut ctx.accounts.milestone;
-        require!(milestone.status == MilestoneStatus::Submitted, ReflectError::MilestoneNotActive);
-
-        // CPI: Transfer stake lamports to escrow vault PDA
-        let cpi_context = CpiContext::new(
-            ctx.accounts.system_program.to_account_info(),
-            anchor_lang::system_program::Transfer {
-                from: ctx.accounts.peer.to_account_info(),
-                to: ctx.accounts.escrow_vault.to_account_info(),
-            },
+        require!(score >= 1 && score <= 100, ChronicleError::InvalidAttestationScore);
+        require!(feedback.len() <= MAX_SUMMARY_LEN, ChronicleError::StringOutOfBounds);
+        require!(
+            ctx.accounts.profile.authority != ctx.accounts.mentor.key(),
+            ChronicleError::CannotSelfAttest
         );
-        anchor_lang::system_program::transfer(cpi_context, stake_lamports)?;
 
-        // Calculate conviction based on time delta from submission
-        let now = Clock::get()?.unix_timestamp;
-        let elapsed = (now - milestone.submission_timestamp).max(0);
-        
-        // Linearized exponential conviction approximation: Conviction = Stake * (1 + elapsed / half_life)
-        let half_life = ctx.accounts.global_config.conviction_halflife_seconds;
-        let decay_weight = (elapsed as u128)
-            .checked_mul(CONVICTION_SCALE as u128)
-            .ok_or(ReflectError::MathOverflow)?
-            .checked_div(half_life as u128)
-            .ok_or(ReflectError::MathOverflow)?
-            .min(CONVICTION_SCALE as u128 * 5); // Capped maximum multiplier
-
-        let added_conviction = (stake_lamports as u128)
-            .checked_mul(CONVICTION_SCALE as u128 + decay_weight)
-            .ok_or(ReflectError::MathOverflow)?
-            .checked_div(CONVICTION_SCALE as u128)
-            .ok_or(ReflectError::MathOverflow)? as u64;
-
+        let profile = &mut ctx.accounts.profile;
+        let milestone = &mut ctx.accounts.milestone;
         let attestation = &mut ctx.accounts.attestation;
+        let clock = Clock::get()?;
+
         attestation.milestone = milestone.key();
-        attestation.peer = peer;
-        attestation.staked_lamports = attestation.staked_lamports.checked_add(stake_lamports).ok_or(ReflectError::MathOverflow)?;
-        attestation.conviction_weight = attestation.conviction_weight.checked_add(added_conviction).ok_or(ReflectError::MathOverflow)?;
-        attestation.timestamp = now;
-        attestation.is_slashed = false;
+        attestation.mentor = ctx.accounts.mentor.key();
+        attestation.score = score;
+        attestation.feedback = feedback;
+        attestation.timestamp = clock.unix_timestamp;
         attestation.bump = ctx.bumps.attestation;
 
-        milestone.conviction_score = milestone.conviction_score.checked_add(added_conviction).ok_or(ReflectError::MathOverflow)?;
-        milestone.total_staked_lamports = milestone.total_staked_lamports.checked_add(stake_lamports).ok_or(ReflectError::MathOverflow)?;
+        milestone.attestation_count = milestone
+            .attestation_count
+            .checked_add(1)
+            .ok_or(ChronicleError::NumericalOverflow)?;
 
-        emit!(PeerAttestationEvent {
+        profile.total_attestations = profile
+            .total_attestations
+            .checked_add(1)
+            .ok_or(ChronicleError::NumericalOverflow)?;
+
+        emit!(AttestationRecorded {
             milestone: milestone.key(),
-            peer,
-            staked_lamports: stake_lamports,
-            conviction_added: added_conviction,
-            timestamp: now,
-        });
-
-        Ok(())
-    }
-
-    /// Finalize milestone and mint an immutable, soulbound Token-2022 proof to the builder
-    pub fn finalize_milestone(ctx: Context<FinalizeMilestone>) -> Result<()> {
-        let milestone = &mut ctx.accounts.milestone;
-        require!(milestone.status == MilestoneStatus::Submitted, ReflectError::MilestoneNotActive);
-        
-        let project = &mut ctx.accounts.project;
-        
-        // Minimum conviction requirement for automated graduation
-        let conviction_threshold: u64 = 100_000_000; // 100M units
-        require!(milestone.conviction_score >= conviction_threshold, ReflectError::ThresholdNotMet);
-
-        milestone.status = MilestoneStatus::Verified;
-        project.total_accumulated_conviction = project.total_accumulated_conviction
-            .checked_add(milestone.conviction_score)
-            .ok_or(ReflectError::MathOverflow)?;
-
-        // Execute CPI to Token-2022 to mint 1 Soulbound Proof Badge to the builder
-        let project_key = project.key();
-        let seeds = &[
-            b"project".as_ref(),
-            project.authority.as_ref(),
-            &[project.bump],
-        ];
-        let signer = &[&seeds[..]];
-
-        let cpi_accounts = MintTo {
-            mint: ctx.accounts.badge_mint.to_account_info(),
-            to: ctx.accounts.builder_token_account.to_account_info(),
-            authority: project.to_account_info(),
-        };
-        let cpi_program = ctx.accounts.token_2022_program.to_account_info();
-        let cpi_ctx = CpiContext::new_with_signer(cpi_program, cpi_accounts, signer);
-        mint_to(cpi_ctx, 1)?;
-
-        emit!(MilestoneFinalizedEvent {
-            project: project_key,
-            milestone: milestone.key(),
-            final_conviction: milestone.conviction_score,
-            badge_mint: ctx.accounts.badge_mint.key(),
-            timestamp: Clock::get()?.unix_timestamp,
-        });
-
-        Ok(())
-    }
-
-    /// Slashes bad-faith milestone entries and penalizes colluding peer accounts
-    pub fn slash_fraudulent_milestone(
-        ctx: Context<SlashMilestone>,
-        reason: String,
-    ) -> Result<()> {
-        require_keys_eq!(ctx.accounts.authority.key(), ctx.accounts.global_config.authority, ReflectError::Unauthorized);
-        
-        let milestone = &mut ctx.accounts.milestone;
-        milestone.status = MilestoneStatus::Slashed;
-
-        let total_vault_lamports = ctx.accounts.escrow_vault.to_account_info().lamports();
-        let slash_bps = ctx.accounts.global_config.slashing_penalty_bps as u64;
-        let penalty_amount = (total_vault_lamports as u128)
-            .checked_mul(slash_bps as u128)
-            .ok_or(ReflectError::MathOverflow)?
-            .checked_div(10_000)
-            .ok_or(ReflectError::MathOverflow)? as u64;
-
-        if penalty_amount > 0 {
-            **ctx.accounts.escrow_vault.to_account_info().try_borrow_mut_lamports()? = ctx
-                .accounts
-                .escrow_vault
-                .to_account_info()
-                .lamports()
-                .checked_sub(penalty_amount)
-                .ok_or(ReflectError::MathOverflow)?;
-
-            **ctx.accounts.treasury.to_account_info().try_borrow_mut_lamports()? = ctx
-                .accounts
-                .treasury
-                .to_account_info()
-                .lamports()
-                .checked_add(penalty_amount)
-                .ok_or(ReflectError::MathOverflow)?;
-        }
-
-        emit!(MilestoneSlashedEvent {
-            milestone: milestone.key(),
-            slashed_amount: penalty_amount,
-            reason,
-            timestamp: Clock::get()?.unix_timestamp,
+            mentor: attestation.mentor,
+            score,
+            timestamp: attestation.timestamp,
         });
 
         Ok(())
@@ -269,164 +139,88 @@ pub mod colosseum_reflect {
 // -----------------------------------------------------------------------------
 
 #[derive(Accounts)]
-pub struct InitializeProtocol<'info> {
+pub struct InitializeBuilderProfile<'info> {
     #[account(
         init,
         payer = authority,
-        space = 8 + GlobalConfig::INIT_SPACE,
-        seeds = [b"config"],
+        space = 8 + BuilderProfile::INIT_SPACE,
+        seeds = [b"profile", authority.key().as_ref()],
         bump
     )]
-    pub global_config: Account<'info, GlobalConfig>,
+    pub profile: Account<'info, BuilderProfile>,
+
     #[account(mut)]
     pub authority: Signer<'info>,
-    /// CHECK: Safe treasury address receiving slashed penalties
-    pub treasury: UncheckedAccount<'info>,
+
     pub system_program: Program<'info, System>,
 }
 
 #[derive(Accounts)]
-#[instruction(project_slug: String)]
-pub struct InitializeProject<'info> {
+pub struct RecordMilestone<'info> {
     #[account(
         mut,
-        seeds = [b"config"],
-        bump = global_config.bump
+        has_one = authority @ ChronicleError::UnauthorizedProfileOwner,
+        seeds = [b"profile", authority.key().as_ref()],
+        bump = profile.bump,
     )]
-    pub global_config: Account<'info, GlobalConfig>,
+    pub profile: Account<'info, BuilderProfile>,
+
     #[account(
         init,
         payer = authority,
-        space = 8 + Project::INIT_SPACE,
-        seeds = [b"project", authority.key().as_ref()],
+        space = 8 + MilestoneRecord::INIT_SPACE,
+        seeds = [
+            b"milestone",
+            profile.key().as_ref(),
+            &profile.milestone_count.to_le_bytes()
+        ],
         bump
     )]
-    pub project: Account<'info, Project>,
+    pub milestone: Account<'info, MilestoneRecord>,
+
     #[account(mut)]
     pub authority: Signer<'info>,
+
     pub system_program: Program<'info, System>,
 }
 
 #[derive(Accounts)]
-#[instruction(milestone_index: u32)]
-pub struct SubmitMilestone<'info> {
+pub struct AttestMilestone<'info> {
     #[account(
         mut,
-        seeds = [b"project", authority.key().as_ref()],
-        bump = project.bump,
-        has_one = authority @ ReflectError::Unauthorized
+        seeds = [b"profile", profile.authority.as_ref()],
+        bump = profile.bump,
     )]
-    pub project: Account<'info, Project>,
-    #[account(
-        init,
-        payer = authority,
-        space = 8 + Milestone::INIT_SPACE,
-        seeds = [b"milestone", project.key().as_ref(), &milestone_index.to_le_bytes()],
-        bump
-    )]
-    pub milestone: Account<'info, Milestone>,
-    #[account(mut)]
-    pub authority: Signer<'info>,
-    pub system_program: Program<'info, System>,
-}
+    pub profile: Account<'info, BuilderProfile>,
 
-#[derive(Accounts)]
-pub struct AttestPeerMilestone<'info> {
-    #[account(
-        seeds = [b"config"],
-        bump = global_config.bump
-    )]
-    pub global_config: Account<'info, GlobalConfig>,
-    #[account(
-        seeds = [b"project", project.authority.as_ref()],
-        bump = project.bump
-    )]
-    pub project: Account<'info, Project>,
     #[account(
         mut,
-        seeds = [b"milestone", project.key().as_ref(), &milestone.milestone_index.to_le_bytes()],
-        bump = milestone.bump
-    )]
-    pub milestone: Account<'info, Milestone>,
-    #[account(
-        init_if_needed,
-        payer = peer,
-        space = 8 + Attestation::INIT_SPACE,
-        seeds = [b"attestation", milestone.key().as_ref(), peer.key().as_ref()],
-        bump
-    )]
-    pub attestation: Account<'info, Attestation>,
-    #[account(
-        mut,
-        seeds = [b"vault", project.key().as_ref()],
-        bump
-    )]
-    pub escrow_vault: SystemAccount<'info>,
-    #[account(mut)]
-    pub peer: Signer<'info>,
-    pub system_program: Program<'info, System>,
-}
-
-#[derive(Accounts)]
-pub struct FinalizeMilestone<'info> {
-    #[account(
-        mut,
-        seeds = [b"project", project.authority.as_ref()],
-        bump = project.bump
-    )]
-    pub project: Account<'info, Project>,
-    #[account(
-        mut,
-        seeds = [b"milestone", project.key().as_ref(), &milestone.milestone_index.to_le_bytes()],
+        seeds = [
+            b"milestone",
+            profile.key().as_ref(),
+            &milestone.index.to_le_bytes()
+        ],
         bump = milestone.bump,
-        has_one = project @ ReflectError::InvalidProjectLink
     )]
-    pub milestone: Account<'info, Milestone>,
-    #[account(
-        mut,
-        mint::authority = project.key(),
-        mint::token_program = token_2022_program
-    )]
-    pub badge_mint: InterfaceAccount<'info, Mint>,
-    #[account(
-        mut,
-        token::mint = badge_mint,
-        token::authority = project.authority,
-        token::token_program = token_2022_program
-    )]
-    pub builder_token_account: InterfaceAccount<'info, TokenAccount>,
-    pub token_2022_program: Program<'info, Token2022>,
-}
+    pub milestone: Account<'info, MilestoneRecord>,
 
-#[derive(Accounts)]
-pub struct SlashMilestone<'info> {
     #[account(
-        seeds = [b"config"],
-        bump = global_config.bump
-    )]
-    pub global_config: Account<'info, GlobalConfig>,
-    #[account(
-        mut,
-        seeds = [b"project", project.authority.as_ref()],
-        bump = project.bump
-    )]
-    pub project: Account<'info, Project>,
-    #[account(
-        mut,
-        seeds = [b"milestone", project.key().as_ref(), &milestone.milestone_index.to_le_bytes()],
-        bump = milestone.bump
-    )]
-    pub milestone: Account<'info, Milestone>,
-    #[account(
-        mut,
-        seeds = [b"vault", project.key().as_ref()],
+        init,
+        payer = mentor,
+        space = 8 + AttestationRecord::INIT_SPACE,
+        seeds = [
+            b"attestation",
+            milestone.key().as_ref(),
+            mentor.key().as_ref()
+        ],
         bump
     )]
-    pub escrow_vault: SystemAccount<'info>,
+    pub attestation: Account<'info, AttestationRecord>,
+
     #[account(mut)]
-    /// CHECK: Treasury verified against global config
-    pub treasury: AccountInfo<'info>,
-    pub authority: Signer<'info>,
+    pub mentor: Signer<'info>,
+
+    pub system_program: Program<'info, System>,
 }
 
 // -----------------------------------------------------------------------------
@@ -435,144 +229,90 @@ pub struct SlashMilestone<'info> {
 
 #[account]
 #[derive(InitSpace)]
-pub struct GlobalConfig {
-    pub authority: Pubkey,
-    pub treasury: Pubkey,
-    pub slashing_penalty_bps: u16,
-    pub conviction_halflife_seconds: i64,
-    pub total_projects: u64,
-    pub bump: u8,
-}
-
-#[account]
-#[derive(InitSpace)]
-pub struct Project {
-    pub authority: Pubkey,
-    #[max_len(32)]
-    pub project_slug: String,
-    pub repo_hash: [u8; 32],
-    pub milestone_count: u32,
-    pub total_accumulated_conviction: u64,
-    pub bump: u8,
-}
-
-#[account]
-#[derive(InitSpace)]
-pub struct Milestone {
-    pub project: Pubkey,
-    pub milestone_index: u32,
-    pub commit_root: [u8; 32],
-    pub expected_deliverable_hash: [u8; 32],
+pub struct BuilderProfile {
+    pub authority: Pubkey,                   // 32
+    #[max_len(64)]
+    pub name: String,                        // 4 + 64
+    #[max_len(64)]
+    pub project_name: String,                // 4 + 64
     #[max_len(128)]
-    pub reflection_uri: String,
-    pub submission_timestamp: i64,
-    pub conviction_score: u64,
-    pub total_staked_lamports: u64,
-    pub status: MilestoneStatus,
-    pub bump: u8,
+    pub metadata_uri: String,                // 4 + 128
+    pub milestone_count: u32,                // 4
+    pub total_attestations: u32,             // 4
+    pub created_at: i64,                     // 8
+    pub bump: u8,                            // 1
 }
 
 #[account]
 #[derive(InitSpace)]
-pub struct Attestation {
-    pub milestone: Pubkey,
-    pub peer: Pubkey,
-    pub staked_lamports: u64,
-    pub conviction_weight: u64,
-    pub timestamp: i64,
-    pub is_slashed: bool,
-    pub bump: u8,
+pub struct MilestoneRecord {
+    pub profile: Pubkey,                     // 32
+    pub index: u32,                          // 4
+    #[max_len(64)]
+    pub title: String,                       // 4 + 64
+    #[max_len(280)]
+    pub summary: String,                     // 4 + 280
+    pub proof_hash: [u8; 32],                // 32
+    pub category: u8,                        // 1 (0: Ideation, 1: Arch, 2: Pivot, 3: MVP, 4: Launch)
+    pub hours_invested: u16,                 // 2
+    pub attestation_count: u16,              // 2
+    pub created_at: i64,                     // 8
+    pub bump: u8,                            // 1
 }
 
-#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, InitSpace)]
-pub enum MilestoneStatus {
-    Submitted,
-    Verified,
-    Slashed,
+#[account]
+#[derive(InitSpace)]
+pub struct AttestationRecord {
+    pub milestone: Pubkey,                   // 32
+    pub mentor: Pubkey,                      // 32
+    pub score: u8,                           // 1 (1 - 100)
+    #[max_len(280)]
+    pub feedback: String,                    // 4 + 280
+    pub timestamp: i64,                      // 8
+    pub bump: u8,                            // 1
 }
 
 // -----------------------------------------------------------------------------
-// EVENTS
+// EVENTS & ERRORS
 // -----------------------------------------------------------------------------
 
 #[event]
-pub struct ProtocolInitializedEvent {
-    pub authority: Pubkey,
-    pub slashing_penalty_bps: u16,
+pub struct BuilderProfileInitialized {
+    pub builder: Pubkey,
+    pub project_name: String,
     pub timestamp: i64,
 }
 
 #[event]
-pub struct ProjectRegisteredEvent {
-    pub project_key: Pubkey,
-    pub authority: Pubkey,
-    pub slug: String,
-    pub timestamp: i64,
-}
-
-#[event]
-pub struct MilestoneSubmittedEvent {
-    pub project: Pubkey,
+pub struct MilestonePublished {
+    pub builder: Pubkey,
+    pub profile: Pubkey,
     pub milestone_index: u32,
-    pub commit_root: [u8; 32],
-    pub reflection_uri: String,
+    pub proof_hash: [u8; 32],
+    pub category: u8,
     pub timestamp: i64,
 }
 
 #[event]
-pub struct PeerAttestationEvent {
+pub struct AttestationRecorded {
     pub milestone: Pubkey,
-    pub peer: Pubkey,
-    pub staked_lamports: u64,
-    pub conviction_added: u64,
+    pub mentor: Pubkey,
+    pub score: u8,
     pub timestamp: i64,
 }
-
-#[event]
-pub struct MilestoneFinalizedEvent {
-    pub project: Pubkey,
-    pub milestone: Pubkey,
-    pub final_conviction: u64,
-    pub badge_mint: Pubkey,
-    pub timestamp: i64,
-}
-
-#[event]
-pub struct MilestoneSlashedEvent {
-    pub milestone: Pubkey,
-    pub slashed_amount: u64,
-    pub reason: String,
-    pub timestamp: i64,
-}
-
-// -----------------------------------------------------------------------------
-// ERROR DEFINITIONS
-// -----------------------------------------------------------------------------
 
 #[error_code]
-pub enum ReflectError {
-    #[msg("Slashing basis points must be <= 10,000")]
-    InvalidBps,
-    #[msg("Conviction half-life must be greater than zero")]
-    InvalidHalfLife,
-    #[msg("Slug length exceeds maximum limit of 32 bytes")]
-    SlugTooLong,
-    #[msg("Reflection URI exceeds maximum limit of 128 bytes")]
-    UriTooLong,
-    #[msg("Unauthorized signer for project operations")]
-    Unauthorized,
-    #[msg("Milestones must be submitted sequentially")]
-    InvalidMilestoneSequence,
-    #[msg("Self-attestation on own milestone is strictly forbidden")]
-    SelfAttestationForbidden,
-    #[msg("Milestone is not active or has already been finalized/slashed")]
-    MilestoneNotActive,
-    #[msg("Stake amount is below the minimum required 0.05 SOL")]
-    InsufficientStake,
-    #[msg("Conviction threshold not met for graduation and SBT mint")]
-    ThresholdNotMet,
-    #[msg("Milestone is not linked to this project")]
-    InvalidProjectLink,
-    #[msg("Arithmetic overflow or underflow detected")]
-    MathOverflow,
+pub enum ChronicleError {
+    #[msg("String provided exceeds authorized size constraint.")]
+    StringOutOfBounds,
+    #[msg("Math calculation resulted in numerical overflow.")]
+    NumericalOverflow,
+    #[msg("Provided milestone category integer is invalid.")]
+    InvalidMilestoneCategory,
+    #[msg("Score must range between 1 and 100 inclusive.")]
+    InvalidAttestationScore,
+    #[msg("Builders are strictly prohibited from self-attesting to milestones.")]
+    CannotSelfAttest,
+    #[msg("Signer is not authorized to mutate this builder profile.")]
+    UnauthorizedProfileOwner,
 }

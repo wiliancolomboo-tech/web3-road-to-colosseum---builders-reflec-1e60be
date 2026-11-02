@@ -1,42 +1,7 @@
-========================================================================================
-[00:00 - 00:20] 🎯 HOOK & THE HACKATHON CHALLENGE
-Visual: Fast camera zoom onto the Colosseum Renaissance dashboard, showing hundreds of 
-projects, then cutting to the terminal running `colosseum_reflect`.
-Narrator (Voiceover):
-"Every hackathon season, thousands of Solana builders write tens of thousands of lines 
-of code. Yet, when judging begins, evaluations rely on rushed pitches and static slides. 
-What if builder reflection and milestone delivery were cryptographically verifiable, 
-peer-attested, and permanently immortalized on-chain?"
+---
 
-[00:20 - 00:50] ⚙️ ARCHITECTURAL WALKTHROUGH & LIVE INITIALIZATION
-Visual: Split screen. Left: Terminal showing `anchor test`. Right: Visual flow diagram 
-highlighting the Project and Milestone PDA seed derivation.
-Narrator:
-"Meet `colosseum_reflect`—the decentralized Proof-of-Reflection protocol built natively 
-for the Colosseum ecosystem. Builders initialize their projects and commit deterministic 
-git commit roots and milestone artifacts directly to Solana Program Derived Addresses."
+# 4. Enterprise Integration Client & Automation CLI
 
-[00:50 - 01:20] 🔒 CONVICTION ATTESTATION & ANTI-SYBIL GAME THEORY
-Visual: Peer builder wallet signing an attestation transaction. Terminal outputs the 
-calculated conviction score and stake lock in the escrow vault.
-Narrator:
-"No fake votes. No sybils. Using our conviction decay algorithm, peer builders stake 
-real SOL to attest to technical depth. Conviction scales with time and proof integrity. 
-Builders cannot vote for themselves, and fraudulent claims face on-chain slashing 
-multisig mechanics."
+A TypeScript-based CLI and Daemon that interacts with the Anchor program, listens to Solana transactions via WebSocket, and pushes structured notifications to **Discord**, **Slack**, and **Resend** (Email).
 
-[01:20 - 01:45] 🏅 SOULBOUND TOKEN-2022 FINALIZATION
-Visual: Browser wallet inspects the minted Soulbound Badge on Solana Explorer with 
-non-transferable extensions and embedded reflection metadata.
-Narrator:
-"Once conviction thresholds are cleared, `colosseum_reflect` issues an immutable 
-Token-2022 Soulbound Milestone Badge directly to the builder. This is a permanent, 
-verifiable credential ready for Colosseum Accelerator screening."
-
-[01:45 - 02:00] 🏆 CLOSING PITCH: WHY THIS WINS 1ST PLACE
-Visual: Clean graphic of the complete ecosystem flywheel with the Colosseum logo.
-Narrator:
-"By transforming ephemeral hackathon efforts into persistent, verifiable reputation 
-assets, `colosseum_reflect` empowers the next generation of Web3 founders. Fast, secure, 
-and 100% open source on Solana."
-========================================================================================
+### `package.json`

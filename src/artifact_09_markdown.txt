@@ -1,0 +1,18 @@
+🧵 1/3
+Building in @ColosseumOrg hackathons moves at the speed of light—but what happens to all the technical breakthroughs, architecture pivots, and post-mortems once the winners are announced?
+
+Introducing Colosseum Chronicles: An on-chain retrospective protocol built on @solana. ⚡🦀
+
+🧵 2/3
+Instead of letting build learnings die in Discord DMs, Colosseum Chronicles lets founders:
+✅ Anchor SHA-256 milestone proofs into dedicated PDAs
+✅ Collect verifiable peer-endorsements from fellow builders
+✅ Auto-syndicate updates to Discord, Slack & Resend investor digests in real time
+
+🧵 3/3
+No fluff. No unverified pitch deck claims. Just cryptographic proof of builder velocity and resilience. 
+
+Complete Anchor program + open-source syndication agent live on Devnet. Built for @ColosseumOrg builders to reflect, share, and scale. 🚀
+
+Github: https://github.com/colosseum-builders/colosseum-chronicles
+#Solana #ColosseumRadar #OnlyPossibleOnSolana

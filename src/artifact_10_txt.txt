@@ -1,0 +1,8 @@
+ColosseumLog replaces "demo theatre" with immutable builder transparency:
+
+⚡ PDA-backed sprint milestone & architecture reflection engine
+🔐 Deterministic SHA-256 payload integrity proofs
+🤝 Peer & mentor attestation scoring
+📡 Real-time Discord & @resend automated telemetry
+
+Built natively with Anchor 0.30.

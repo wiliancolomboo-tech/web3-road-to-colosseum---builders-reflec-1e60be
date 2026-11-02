@@ -1,0 +1,41 @@
+========================================================================================
+TIMESTAMP | VISUAL FOCUS                         | SPOKEN NARRATIVE (AUDIO SCRIPT)
+========================================================================================
+00:00-00:15 | Split screen: Colosseum portal UI  | "Every hackathon cycle, hundreds of 
+            | and terminal running anchor test.  | builders push thousands of commits into the 
+            | High-res banner: 'CRMP Protocol'. | void. When judging comes, technical context is 
+            |                                    | lost, post-mortems disappear into Discord, 
+            |                                    | and milestone claims are impossible to verify. 
+            |                                    | Welcome to the Colosseum Reflection Protocol."
+
+00:15-00:35 | Terminal triggers:                 | "Watch this: With CRMP, teams register a 
+            | `register_builder` followed by     | cryptographic identity on Solana. Alice logs 
+            | `submit_milestone`. Explorer shows | her core engine MVP milestone. We don't just 
+            | sub-15,000 CU execution.           | record a name—we anchor the exact git commit 
+            |                                    | SHA, build CID, and Compute Unit delta directly 
+            |                                    | into a zero-bloat Solana PDA."
+
+00:35-01:00 | Adversarial test fails on screen:  | "Now, what if Alice attempts to game the system 
+            | Alice tries endorsing her own build| by endorsing herself? Rejected instantly by our 
+            | -> Error 0x1772 (SelfEndorsement). | program constraint. Only qualified peers with 
+            | Bob endorses -> Transaction        | verified builder reputations can validate her 
+            | confirmed in 400ms.                | milestone, boosting her decentralized score."
+
+01:00-01:25 | Terminal executes:                 | "Here is the heart of 'Reflect & Share': 
+            | `submit_retrospective`.            | Alice submits her technical retrospective. 
+            | Displaying diff hashes and CU      | She documents how she optimized her instruction 
+            | benchmarks saved (4,500 CUs).     | logic by 4,500 CUs, committing the optimization 
+            |                                    | diff hash permanently on-chain for the 
+            |                                    | Colosseum Accelerator judges to audit."
+
+01:25-01:45 | Architecture diagram animation:    | "Under the hood: Strict PDA derivation, 
+            | PDA seed paths, zero dynamic       | saturating reputation math, and zero heap 
+            | allocations, CU metric table.      | reallocations. Every single transaction runs 
+            |                                    | cleanly below 18,000 Compute Units, making 
+            |                                    | CRMP hyper-scalable for thousands of builders."
+
+01:45-02:00 | Call to action: GitHub repository, | "Road to Colosseum is about honoring the real, 
+            | deployed Devnet Program ID, and    | hard engineering behind every commit. CRMP makes 
+            | Colosseum submission card.         | that journey immutable, verifiable, and shared. 
+            |                                    | Thank you."
+========================================================================================

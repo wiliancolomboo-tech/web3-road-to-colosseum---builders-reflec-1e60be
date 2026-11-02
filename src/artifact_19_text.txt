@@ -1,0 +1,7 @@
+2/ RetroPulse binds your Colosseum submission directly to Solana Layer-1:
+
+⚙️ PDA accounts cryptographically store your Git SHA-1 & Retrospective SHA-256
+⚡ Real-time Anchor event emissions stream to Discord/Slack syndicate channels
+📬 Automated mentor briefs dispatched via @resend
+
+Proof of build. Proof of journey. Zero fluff.

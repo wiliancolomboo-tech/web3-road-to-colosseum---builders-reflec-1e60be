@@ -1,0 +1,4 @@
+PROGRAM_ID=ColoRef1111111111111111111111111111111111111
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+RESEND_API_KEY=re_123456789abcdef
+NOTIFICATION_EMAIL=accelerator-review@colosseum.org

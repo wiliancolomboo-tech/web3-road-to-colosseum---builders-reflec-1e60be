@@ -1,0 +1,79 @@
+{
+  "address": "ColoM1rr0r1111111111111111111111111111111111",
+  "metadata": {
+    "name": "colosseum_chronicles",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
+  "instructions": [
+    {
+      "name": "initialize_protocol",
+      "discriminator": [245, 175, 231, 225, 193, 82, 212, 134],
+      "accounts": [
+        { "name": "config", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [99, 104, 114, 111, 110, 105, 99, 108, 101, 95, 99, 111, 110, 102, 105, 103] }] } },
+        { "name": "authority", "writable": true, "signer": true },
+        { "name": "system_program", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [{ "name": "fee_basis_points", "type": "u16" }]
+    },
+    {
+      "name": "register_builder",
+      "discriminator": [41, 184, 195, 171, 91, 197, 85, 203],
+      "accounts": [
+        { "name": "config", "writable": true },
+        { "name": "builder_profile", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [98, 117, 105, 108, 100, 101, 114] }, { "kind": "account", "path": "authority" }] } },
+        { "name": "authority", "writable": true, "signer": true },
+        { "name": "system_program", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [
+        { "name": "handle", "type": "string" },
+        { "name": "track", "type": { "defined": { "name": "HackathonTrack" } } }
+      ]
+    },
+    {
+      "name": "log_reflection",
+      "discriminator": [168, 172, 191, 230, 83, 107, 171, 80],
+      "accounts": [
+        { "name": "config", "writable": true },
+        { "name": "builder_profile", "writable": true },
+        { "name": "reflection", "writable": true },
+        { "name": "authority", "writable": true, "signer": true },
+        { "name": "system_program", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [
+        { "name": "metadata_cid", "type": "string" },
+        { "name": "commit_hash", "type": { "array": ["u8", 32] } },
+        { "name": "milestone_index", "type": "u32" },
+        { "name": "title", "type": "string" }
+      ]
+    }
+  ],
+  "accounts": [
+    { "name": "ChronicleConfig", "discriminator": [145, 198, 204, 219, 131, 89, 78, 17] },
+    { "name": "BuilderProfile", "discriminator": [211, 8, 232, 45, 239, 182, 111, 24] },
+    { "name": "MilestoneReflection", "discriminator": [169, 12, 132, 235, 173, 203, 18, 101] }
+  ],
+  "events": [
+    {
+      "name": "MilestoneLogged",
+      "discriminator": [219, 233, 71, 248, 200, 117, 107, 98]
+    }
+  ],
+  "types": [
+    {
+      "name": "HackathonTrack",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          { "name": "DeFi" },
+          { "name": "DePIN" },
+          { "name": "AI" },
+          { "name": "Infrastructure" },
+          { "name": "Gaming" },
+          { "name": "Consumer" },
+          { "name": "Payments" }
+        ]
+      }
+    }
+  ]
+}

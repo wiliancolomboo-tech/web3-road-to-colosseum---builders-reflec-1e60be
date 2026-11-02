@@ -1,0 +1,7 @@
+1/ Building on the Road to @Colosseum? 🏛️
+
+Thousands of teams build in private silos, dropping updates across X, Telegram, and Discord with zero verifiable cadence. 
+
+Judging day arrives, and proof-of-work is hard to verify.
+
+We built ReflectSol: Verifiable On-Chain Builder Reflections on @solana 🧵👇

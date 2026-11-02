@@ -1,0 +1,5 @@
+services/worker/
+├── package.json
+├── tsconfig.json
+└── src/
+    └── indexer_and_notifier.ts

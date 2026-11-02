@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  chronoproof-relay:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: colosseum_chronoproof_service
+    restart: unless-stopped
+    environment:
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - ANCHOR_WALLET=/secrets/id.json
+      - PROGRAM_ID=ChronoV2B1drX7sKzpUqC8DkQx7YpLgT3dNxT3gWpL7r
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - ACCELERATOR_NOTIFY_EMAIL=${ACCELERATOR_NOTIFY_EMAIL}
+    volumes:
+      - ./secrets:/secrets:ro
+    command: ["--help"]

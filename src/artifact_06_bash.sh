@@ -1,15 +1,18 @@
-# 1. Clone repository and navigate to root
-git clone https://github.com/solana-colosseum/colosseum-reflect.git
-cd colosseum-reflect
-
-# 2. Install TypeScript dependencies
+# 1. Clone repository & install dependencies
+git clone https://github.com/colosseum-chronicle/protocol.git
+cd protocol
 yarn install
 
-# 3. Build the Anchor program to generate IDL and program keypair
+# 2. Build Anchor Smart Program
 anchor build
 
-# 4. Sync Program ID (if different from declared ID)
+# 3. Synchronize Program ID (if redeploying)
 anchor keys sync
 
-# 5. Run the full integration test suite on local validator
+# 4. Run full comprehensive test suite locally
 anchor test
+
+# 5. Deploy to Solana Devnet
+solana config set --url https://api.devnet.solana.com
+solana airdrop 2
+anchor deploy --provider.cluster devnet

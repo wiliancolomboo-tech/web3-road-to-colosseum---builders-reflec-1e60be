@@ -1,0 +1,12 @@
+GET /health HTTP/1.1
+Host: localhost:3000
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "status": "healthy",
+  "timestamp": "2025-01-01T12:00:00.000Z",
+  "rpc": "https://api.devnet.solana.com",
+  "programId": "Chron1c1e11111111111111111111111111111111111"
+}

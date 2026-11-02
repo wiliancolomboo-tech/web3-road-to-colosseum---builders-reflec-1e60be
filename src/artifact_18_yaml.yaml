@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  chronicle-daemon:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: colosseum-chronicle-daemon
+    restart: unless-stopped
+    environment:
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - SOLANA_WS_URL=wss://api.devnet.solana.com
+      - PROGRAM_ID=ChrncLEvE8z9fK2F8Lw4U9n6W3B2V7mD1G8pQ5yT4rA
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - SCOUT_EMAIL_RECIPIENT=${SCOUT_EMAIL_RECIPIENT:-scouts@colosseum.org}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

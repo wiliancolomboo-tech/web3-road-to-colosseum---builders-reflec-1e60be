@@ -1,0 +1,8 @@
+{
+  "status": "HEALTHY",
+  "service": "chronicle-enterprise-daemon",
+  "cluster": "https://api.devnet.solana.com",
+  "programId": "Chron1cLe11111111111111111111111111111111111",
+  "uptime": 1420.52,
+  "timestamp": 1729000000000
+}

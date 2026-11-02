@@ -1,0 +1,20 @@
+🧵 1/3
+Building under pressure during the hackathon is intense, but the most valuable asset isn't just the code—it's the journey.
+
+Introducing Colosseum Chronicle: an on-chain builder reflection protocol built natively on @Solana for the "Road to Colosseum". 🏛️⚡
+
+#Solana #Colosseum #BuildInPublic
+
+🧵 2/3
+What gets measured gets backed. 
+With Chronicle, builders anchor:
+✅ SHA-256 attested milestone reflections & post-mortems
+✅ Velocity & pivot telemetry directly into deterministic PDAs
+✅ Real-time multi-channel broadcasts to Discord, Slack & @Resend briefings for mentors!
+
+🧵 3/3
+No more lost Notion notes or untracked hacks. Just verifiable builder lineage on the fastest chain in Web3.
+
+Check out the full open-source repo & turnkey sentinel engine here: https://github.com/solana-foundation/road-to-colosseum
+
+Let's build the future together @ColosseumOrg 🚀

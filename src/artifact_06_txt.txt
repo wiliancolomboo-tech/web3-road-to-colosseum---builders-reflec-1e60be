@@ -1,0 +1,9 @@
+client/
+├── package.json
+├── tsconfig.json
+└── src/
+    ├── agent.ts
+    ├── cli.ts
+    └── services/
+        ├── email.ts
+        └── discord.ts

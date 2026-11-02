@@ -1,0 +1,8 @@
+Continuous execution > Last-minute slides.
+
+With ColosseumLog, every architectural pivot, test benchmark, and milestone becomes an unforgeable on-chain resume for founders and VCs.
+
+Built for the Road to Colosseum. 🏛️🚀
+
+Inspect the contract & run the daemon: github.com/colosseum-log/protocol
+#Solana #Colosseum #SolanaBuilders #Rust

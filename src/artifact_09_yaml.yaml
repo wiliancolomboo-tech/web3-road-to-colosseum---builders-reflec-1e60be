@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  chronicle-daemon:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chronicle-event-daemon
+    restart: always
+    environment:
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - SOLANA_WS_URL=wss://api.devnet.solana.com
+      - PROGRAM_ID=Chron1c1eBui1derRef1ect1on111111111111111111
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - ALERT_EMAIL=founders@colosseum.org
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - PORT=8080
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

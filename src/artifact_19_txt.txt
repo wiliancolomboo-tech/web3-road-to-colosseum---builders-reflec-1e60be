@@ -1,0 +1,9 @@
+OPERATIONAL RUNBOOK
++----------------------+-----------------------------------------------------------------+
+| Incident Scenario    | Resolution Protocol                                             |
++----------------------+-----------------------------------------------------------------+
+| WebSocket Disconnect | Daemon has built-in auto-retry with exponential backoff.        |
+| RPC Rate Limit (429) | Rotate endpoint in .env to private Helius/QuickNode RPC URL.    |
+| Missed Blocks        | Run recovery CLI: `npm run sync --from-slot=<SLOT_NUMBER>`.    |
+| Discord HTTP 429     | Backlog stored in local FIFO memory buffer; retried at reset.   |
++----------------------+-----------------------------------------------------------------+

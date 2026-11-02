@@ -1,0 +1,12 @@
+GET /health HTTP/1.1
+Host: localhost:8080
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "status": "HEALTHY",
+  "programId": "CPRf44ZgGjLh6UvV8b4TzGvD7eZ6m2K1QzB5aYn8VpXe",
+  "rpcLatencyMs": 14,
+  "trackedMilestones": 128
+}

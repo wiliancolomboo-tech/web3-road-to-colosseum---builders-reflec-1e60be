@@ -1,0 +1,6 @@
+1/ Building during the Road to @Colosseum hackathon is a crucible of high-velocity engineering, late-night breakthroughs, and tough post-mortems on @solana. 
+
+Yet, builder knowledge evaporates in private DMs and unindexed chats.
+
+Introducing Colosseum Chronicle 🏛️⚡
+A decentralized, verifiable milestone & reflection protocol on Solana. 🧵👇

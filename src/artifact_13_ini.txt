@@ -1,0 +1,11 @@
+# Solana Network Config
+SOLANA_RPC_URL=https://api.devnet.solana.com
+SOLANA_WS_URL=wss://api.devnet.solana.com
+PROGRAM_ID=CPRFtX2qN9c8p7DvZ4jK4Z7XqV4Qp5hM2h8R3p1sVvW
+
+# Resend API Key for Mentor Dossier Email Dispatch
+RESEND_API_KEY=re_123456789_abcdefghijklmnopqrstuvwxyz
+MENTOR_NOTIFICATION_EMAIL=accelerator@colosseum.org
+
+# Discord Webhook for Hackathon Community Alerts
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder

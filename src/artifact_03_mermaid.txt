@@ -1,0 +1,29 @@
+flowchart TD
+    subgraph ClientLayer["Builder & Mentor Execution Layer"]
+        A[Builder Terminal / CLI Engine] -->|1. Sign TX via Ed25519 Keypair| B(Anchor Client RPC)
+        M[Colosseum Mentor / Judge] -->|4. Attest Quality & Milestone| B
+    end
+
+    subgraph SolanaRuntime["Solana Sealevel Runtime (Devnet / Mainnet)"]
+        B --> C[Colosseum Chronicle Program: ChroNiC1e11111111111111111111111111111111111]
+        
+        subgraph PDA_Storage["Deterministic Program Derived Addresses"]
+            C --> D[(BuilderProfile PDA<br>seeds: ['builder', authority])]
+            C --> E[(RetrospectiveEntry PDA<br>seeds: ['retrospective', builder, index])]
+            C --> F[(Attestation PDA<br>seeds: ['attestation', retrospective, mentor])]
+        end
+
+        C --> G[Emit Solana Event Logs<br>'RetrospectivePublishedEvent']
+    end
+
+    subgraph OrchestrationLayer["Chronicle Event Orchestration Daemon"]
+        H[Chronicle WebSocket Listener] -->|Subscribe to Program Logs| G
+        H --> I[Payload Sanitizer & Verification Engine]
+        I --> J[Metadata IPFS/Arweave Resolver]
+    end
+
+    subgraph EnterpriseOutlets["Enterprise Broadcast & Notification Rail"]
+        I -->|POST JSON Payload| K[Discord Hackathon Showcase Webhook]
+        I -->|POST Structured BlockKit| L[Slack Accelerator Pipeline]
+        I -->|POST HTTPS Authorization: Bearer| M2[Resend Email API: Mentor Digest]
+    end

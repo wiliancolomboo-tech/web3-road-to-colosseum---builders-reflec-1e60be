@@ -1,0 +1,11 @@
+# Colosseum Retrospective: Zero-Downtime State Compression
+
+### Key Architectural Learnings
+During the sprint, our team tackled account space rent costs by migrating to state compression. 
+We faced concurrency locks when writing multiple trees within the same transaction slot. 
+By rearchitecting our instruction batching to isolate concurrent Merkle roots, we achieved 2,400 TPS 
+on devnet with sub-second finality.
+
+### Future Roadmap
+1. Complete formal verification of our CPI bridge.
+2. Launch on Colosseum Accelerator cohort demo day.

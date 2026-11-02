@@ -1,0 +1,6 @@
+Built with @AnchorLang on @solana:
+✅ SHA-256 anchored dev retrospectives on deterministic PDAs
+✅ Peer endorsements & micro-grants directly rewarding transparency
+✅ Turnkey syndication pipelines routing briefs to VC scouts via @resend & Discord
+
+Real proof of work. Real proof of growth. 🛠️📦

@@ -1,0 +1,18 @@
+🧵 1/3
+Building for @ColosseumOrg isn't just about shipping code at the 11th hour—it's about the technical pivots, the architectural breakthroughs, and the relentless daily velocity. 
+
+Introducing Colosseum Chronicle: an on-chain milestone attestation & retrospective protocol on @solana. ⚡🏛️
+
+🧵 2/3
+No more ephemeral learnings lost in Discord. 
+With Chronicle, builders anchor cryptographic build digests (SHA-256), reflection notes, and velocity scores straight into deterministic PDAs on Solana. 
+
+Our event worker instantly relays verified milestones to Discord, Slack & Resend! 📡🛠️
+
+🧵 3/3
+Judges and mentors get provable proof-of-work. Builders build a permanent on-chain developer reputation. 
+
+Check out the open-source repo, test suites, and 1-click Dockerized relay engine. 
+
+Let's chronicle the Road to Colosseum! 🚀
+#Solana #Colosseum #BuildOnSolana #SolanaDevs

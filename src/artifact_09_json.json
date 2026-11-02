@@ -1,0 +1,7 @@
+{
+    "status": "healthy",
+    "network": "devnet",
+    "last_slot_synced": 298410291,
+    "uptime_seconds": 86400,
+    "webhooks_dispatched": 42
+  }

@@ -1,0 +1,18 @@
+🧵 1/3
+Building through the hackathon is only the beginning. What separates hobbyists from venture-backed startups is verifiable execution velocity.
+
+Introducing Colosseum Chronicle: an on-chain reflection & telemetry registry built on @solana for @Colosseum. 🚀⚡
+
+#RoadToColosseum #Solana
+
+🧵 2/3
+Instead of lost PRs and outdated pitch decks, Colosseum Chronicle lets teams register an immutable builder odyssey on-chain.
+
+Every sprint reflection, benchmark metric, and architecture pivot is cryptographically signed, anchored via Anchor PDAs, and synced to VC syndicate digests via @resend.
+
+🧵 3/3
+Turn hackathon sweat into auditable proof of work. 
+
+Fully open-source, anchor-verified, and ready for builders transitioning from Radar into the Colosseum Accelerator.
+
+Check out the code & deploy your odyssey: github.com/solana-builders/colosseum-chronicle 🛡️🌐

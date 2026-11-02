@@ -1,0 +1,5 @@
+1/ Building on @Solana during the @ColosseumOrg hackathon is an intense crucible of shipping, pivoting, and architectural breakthroughs. 
+
+Yet, builder learnings vanish into Discord logs and ephemeral tweets. 
+
+That changes today with Chronicle Protocol: Proof-of-Reflection. 🧵👇

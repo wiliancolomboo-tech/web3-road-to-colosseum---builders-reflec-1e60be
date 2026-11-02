@@ -1,0 +1,29 @@
+[00:00 - 00:20] THE HOOK & THE PAIN POINT
+"Solana hackathons like Colosseum are the most competitive engineering arenas in Web3. 
+Teams push the limits of parallel execution, state compression, and CU optimization. 
+Yet, the true architectural breakthroughs—the failed experiments, the gas profiles, 
+and the post-mortems—disappear into closed chats. 
+Today, we unveil the Colosseum Builder Ledger: an on-chain, verifiable reflection 
+and peer-review protocol designed for high-performance builders."
+
+[00:20 - 00:50] ARCHITECTURE & PROTOCOL IN ACTION (LIVE TERMINAL)
+"Notice our Anchor terminal. With a single instruction, our team registers 
+their verified hackathon deployment—binding our target program ID, the exact Git commit SHA, 
+and our technical post-mortem IPFS CID. 
+Watch the second instruction: `record_benchmark`. In just 4,200 Compute Units, we anchor our 
+contract's real transaction footprint directly into the PDA state, creating an auditable 
+benchmark curve that cannot be faked."
+
+[00:50 - 01:25] SYBIL-RESISTANT PEER ATTESTATION & ESCROW
+"The magic happens when the community steps in. Builders review each other's code. 
+Here, reviewer 'EchoDev' submits a critique of our AMM math. 
+Our smart contract immediately verifies non-collusion via `has_one` and `require_keys_neq!`, 
+updates the author's reputation score on-chain, and programmatically releases a 0.005 SOL 
+feedback micro-grant directly from our PDA escrow vault via PDA signed cross-program invocation. 
+Zero intermediaries. 100% verifiable proof of technical merit."
+
+[01:25 - 02:00] WHY THIS PROTOCOL WINS 1ST PLACE
+"This isn't just another bounty entry; it is foundational ecosystem infrastructure. 
+It establishes a permanent, immutable graph of builder reputation, making hackathon judging 
+verifiable, technical feedback incentivized, and architectural knowledge perpetual. 
+Deployable today on Solana. Built for the Road to Colosseum. Thank you."

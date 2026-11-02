@@ -1,0 +1,7 @@
+How C3 works under the hood:
+
+⚡ Anchor PDA state engine storing milestone hashes & verified git commits
+⚡ Qualitative peer & mentor review scoring with immutable sign-offs
+⚡ Off-chain event daemon streaming live progress directly to Discord, Slack & @resend
+
+Every line of code verified forever on Sealevel. 🦀📜

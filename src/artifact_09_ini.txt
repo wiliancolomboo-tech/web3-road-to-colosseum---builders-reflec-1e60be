@@ -1,0 +1,15 @@
+# Solana Configuration
+SOLANA_RPC_URL="https://api.devnet.solana.com"
+SOLANA_KEYPAIR_PATH="./secrets/deployer-keypair.json"
+
+# Hackathon Metadata
+HACKATHON_ID="colosseum-radar-2025"
+METADATA_URI="https://arweave.net/chronos-radar-manifest"
+VELOCITY_SCORE="95"
+PIVOT_COUNT="2"
+
+# External Enterprise Notification Channels
+DISCORD_WEBHOOK_URL="https://api.example.com/webhooks/alerts/placeholder"
+SLACK_WEBHOOK_URL="https://api.example.com/webhooks/alerts/placeholder"
+RESEND_API_KEY="re_123456789_abcdefghijklmnopqrstuvwx"
+SCOUT_NOTIFICATION_EMAIL="scouts@colosseum.org"

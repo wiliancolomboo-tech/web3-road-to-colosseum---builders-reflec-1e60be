@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  colosseum-chronicle-daemon:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - NOTIFICATION_EMAIL=${NOTIFICATION_EMAIL}
+      - PAYER_KEYPAIR_PATH=/secrets/keypair.json
+    volumes:
+      - ./secrets:/secrets:ro
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('Daemon healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

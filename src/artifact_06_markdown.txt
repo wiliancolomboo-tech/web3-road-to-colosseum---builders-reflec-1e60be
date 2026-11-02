@@ -1,0 +1,11 @@
+# Navigating Cross-Program Invocations & Account Reallocs
+
+### Key Learnings
+During this sprint on the Road to Colosseum, we tackled state bloat by migrating dynamic transaction histories to compressed PDAs. We initially hit transaction size limits (1232 bytes) when batching CPIs to the Token Program.
+
+### Architectural Decisions
+- Pivoted from unbounded vectors inside `BuilderProfile` to isolated `ReflectionEntry` PDAs.
+- Added off-chain SHA-256 content verification to avoid storing raw strings on-chain, cutting rent costs by 94%.
+
+### Blockers Solved
+- Solved an Anchor 0.30 discriminator matching error in the test harness by explicitly isolating seed salts.

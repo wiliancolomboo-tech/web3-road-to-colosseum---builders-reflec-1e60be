@@ -1,0 +1,1 @@
+solana account <PROJECT_PDA_ADDRESS> --url devnet

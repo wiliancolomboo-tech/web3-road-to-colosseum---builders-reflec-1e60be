@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  sentinel-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PROGRAM_ID=RefL1ect11111111111111111111111111111111111
+      - SOLANA_RPC_HTTP_URL=https://api.devnet.solana.com
+      - SOLANA_RPC_WS_URL=wss://api.devnet.solana.com
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - SCOUT_DIGEST_EMAIL=scouts@colosseum.org
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+    healthcheck:
+      test: ["CMD-SHELL", "node -e 'process.exit(0)'"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

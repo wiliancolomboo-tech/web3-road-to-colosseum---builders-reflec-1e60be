@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  chronicle-daemon:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chronicle-listener-daemon
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - PROGRAM_ID=Chrnc1e111111111111111111111111111111111111
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - MENTOR_NOTIFICATION_EMAIL=${MENTOR_NOTIFICATION_EMAIL}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

@@ -1,0 +1,13 @@
+### Production Incident & Runbook Procedures
+
+1. RPC Rate Limit Saturation:
+   - Issue: 429 Too Many Requests received from public Solana Devnet RPC.
+   - Mitigation: Swap `SOLANA_RPC_URL` and `SOLANA_WS_URL` in `.env` to private enterprise providers (Helius, Triton, QuickNode). Restart container: `docker compose restart`.
+
+2. Resend API Quota Alerts:
+   - Issue: Worker logs: `[Notifier] Failed to dispatch email via Resend`.
+   - Mitigation: Check Resend dashboard (resend.com/emails). If rate limit reached, ChronoProof gracefully falls back to Discord webhooks without crashing the relayer loop.
+
+3. Health Check Endpoint:
+   - Querying process heartbeat:
+     `docker inspect --format='{{json .State.Health}}' chronoproof-relayer`

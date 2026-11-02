@@ -1,0 +1,24 @@
++-----------------------------------------------------------------------------------+
+|                            COLOSSEUM RETROSPECT PROTOCOL                          |
++-----------------------------------------------------------------------------------+
+|  [On-Chain Anchor Program]                                                       |
+|    Program ID: coloRfZGg3eUvjM1z1Rz8tXg4jK7V8ZqY9tN8Bv7xWp                       |
+|    - Registry PDA: [b"registry", cohort_id]                                       |
+|    - Reflection PDA: [b"reflection", registry_key, builder_pubkey]                |
+|    - Endorsement PDA: [b"endorsement", reflection_key, endorser_pubkey]           |
++------------------------------------------+----------------------------------------+
+                                           | RPC Event PubSub
++------------------------------------------v----------------------------------------+
+|  [Enterprise Daemon & Automation CLI]                                             |
+|    - Node.js / TypeScript ES2022 Runtime                                          |
+|    - Solana Web3.js + @coral-xyz/anchor 0.30.1                                    |
+|    - GitHub API v3 Commit Resolver                                                |
+|    - Resend SDK v3.2.0 (Transactional Executive Digests)                          |
+|    - Webhook Dispatcher (Discord Rich Embeds & Slack Blocks)                      |
++------------------------------------------+----------------------------------------+
+                                           |
+                    +----------------------+----------------------+
+                    |                                             |
+                    v                                             v
+        [Resend SMTP REST API]                      [Enterprise Webhooks]
+   (Investor/Judge Email Digest)                 (Discord #hackathon-retrospect)

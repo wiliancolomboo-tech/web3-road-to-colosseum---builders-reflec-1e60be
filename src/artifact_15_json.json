@@ -1,0 +1,7 @@
+{
+    "status": "healthy",
+    "uptimeSeconds": 4120.35,
+    "rpcTarget": "https://api.devnet.solana.com",
+    "programId": "ChronoP1111111111111111111111111111111111111",
+    "lastHeartbeat": "2025-02-15T14:22:01.000Z"
+  }

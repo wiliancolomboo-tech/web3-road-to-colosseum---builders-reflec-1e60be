@@ -1,0 +1,8 @@
+SOLANA_RPC_URL=https://api.devnet.solana.com
+   CHRONICLE_PROGRAM_ID=ChrnyK8tG82vV6GfGk7L29NfR6aFhZtCqEwB8vP3Colo
+   ANCHOR_WALLET=~/.config/solana/id.json
+   RESEND_API_KEY=re_your_api_key_here
+   RESEND_FROM_EMAIL=chronicle@colosseum.builders
+   NOTIFICATION_RECIPIENT_EMAIL=hackathon-review@colosseum.org
+   DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+   SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder

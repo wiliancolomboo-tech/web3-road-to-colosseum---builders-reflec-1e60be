@@ -1,0 +1,6 @@
+2/ Chronicle Protocol turns hackathon reflections into verifiable, on-chain proofs:
+⚡ Anchor PDA state engine anchoring GitHub SHA roots & deployment metrics
+⚡ Real-time indexer auto-syndicating post-mortems via @Resend & Discord webhooks to Colosseum judges
+⚡ 100% test coverage with zero unsafe assumptions
+
+Code: https://github.com/solana-builders/colosseum-chronicle

@@ -1,0 +1,1 @@
+docker compose logs chronicle-relayer --tail=50 -f

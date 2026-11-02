@@ -1,0 +1,5 @@
+3/ The "Road to Colosseum" isn't just about shipping code on deadline; it's about institutional memory, honest retrospectives, and verifiable builder reputation.
+
+Check out our full open-source repo, Anchor program, and CLI testnet suite: https://github.com/solana-colosseum-echo/chrono-reflect
+
+LFG @ColosseumOrg @solana 🚀

@@ -1,0 +1,49 @@
+================================================================================
+COLOSSEUM SUBMISSION PITCH SCRIPT (2 MINUTES)
+================================================================================
+
+[0:00 - 0:15] INTRODUCTION & THE PROBLEM
+Visual: Screen recording showing a fast-forward scroll of chaotic Discord hackathon 
+channels and unverified commit histories.
+Spoken: 
+"Every year, thousands of builders tackle the Solana Colosseum hackathons. We push 
+tens of thousands of lines of Rust and TypeScript under intense pressure. But at 
+the finish line, judges and peer teams face a wall of unverified claims, missing 
+retrospectives, and zero on-chain record of true technical progress. Today, that changes."
+
+[0:15 - 0:45] PRODUCT OVERVIEW: COLOSSEUM PROOF-OF-BUILD
+Visual: Transition into the Colosseum Reflect Web3 Dashboard. Connect Phantom wallet. 
+Initialize Builder Profile and register a project on the 'DePIN & Infra' track.
+Spoken:
+"Introducing Colosseum Proof-of-Build, an on-chain milestone reflection and 
+cryptographic attestation protocol natively built on Solana. Builders bind their 
+Git commit SHA-256 hashes, architectural retrospectives, and milestone goals on-chain 
+while locking skin-in-the-game stakes into a dedicated program-derived escrow."
+
+[0:45 - 1:15] PEER REVIEW & QUADRATIC CREDIBILITY ENGINE
+Visual: Switch to a Reviewer wallet. Open the pending milestone. Show architectural 
+diffs, click 'Attest Milestone', input a 92/100 score, and sign the transaction. 
+Show the terminal console displaying Compute Units: 21,780 CU.
+Spoken:
+"Peer feedback is no longer vanity. To defeat sybil rings, our protocol applies 
+a quadratic credibility algorithm based on the reviewer's historic track record. 
+Reviewers sign cryptographic attestation hashes. When 5 peer reviews or the deadline 
+is reached, the program evaluates the weighted consensus score."
+
+[1:15 - 1:45] FINALIZATION & ON-CHAIN RESUME
+Visual: Finalize milestone transaction trigger. Escrow vault releases the SOL stake 
+plus a +25 Builder Reputation score. Show the on-chain Builder Passport PDA metadata.
+Spoken:
+"Once approved, the builder's stake is instantly unlocked, minting permanent reputation 
+points to their on-chain builder resume. If a team abandons or fakes deliverables, 
+funds are slashed into the community developer treasury. In under 30,000 Compute 
+Units, builders create a tamper-proof journey of their path to the Colosseum."
+
+[1:45 - 2:00] THE WINNING CLOSE
+Visual: Split screen showcasing the GitHub repo with clean tests passing (green checks) 
+and the Solana Explorer transaction view on Localnet/Devnet.
+Spoken:
+"Colosseum Proof-of-Build turns the grit of hackathon development into an immutable, 
+verifiable proof-of-work asset for the entire Solana ecosystem. Battle-tested, 
+gas-optimized, and ready to power the next generation of Solana founders. Thank you!"
+================================================================================

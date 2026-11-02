@@ -1,0 +1,15 @@
+1/3 🏛️ Building on Solana isn't just about shipping code—it's about the technical breakthroughs, late-night pivots, and hard-earned engineering lessons. 
+
+Excited to unveil the Colosseum Chronicle Protocol (CCP) for the "Road to @Colosseum | Builders Reflect & Share"! 🧵👇
+
+2/3 ⚡ What is CCP?
+An on-chain verifiable retrospective protocol built on Solana Anchor.
+🔹 Cryptographic SHA-256 milestone attestations
+🔹 Zero-copy soulbound developer PDA registries
+🔹 Automated syndication to Discord, Slack & Resend for accelerator mentors & VCs
+
+3/3 🛠️ Open-source, turnkey, and battle-tested:
+Complete Anchor smart contract, automated event relay agent, and Dockerized pipeline ready for Cohort builders.
+
+Check out the full submission & inspect the verified proofs on devnet! 🚀
+#Solana #Colosseum #SolanaBuilders #Rust

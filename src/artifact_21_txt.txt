@@ -1,0 +1,5 @@
+2/ Why is it different?
+
+🔒 Every milestone reflection is anchored on-chain with SHA-256 cryptographic proofs of code commits & compute benchmarks.
+⚡ Powered by Anchor 0.30 PDAs with zero-copy efficiency.
+📡 An automated daemon streams on-chain events straight to Discord & @resend scouts in real time!

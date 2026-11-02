@@ -1,0 +1,20 @@
+flowchart TD
+    subgraph OnChain["Solana Mainnet-Beta / Devnet (Anchor Program)"]
+        A[Builder Wallet] -->|initialize_reflection| B[Reflection PDA]
+        C[Peer / Mentor Wallet] -->|attest_reflection| B
+        B -->|emit Event| D[Solana Program Event Log]
+    end
+
+    subgraph Daemon["ColosseumEcho Relay & Indexer Daemon"]
+        E[Solana RPC WebSocket Listener] -->|Subscribe Program Logs| D
+        E -->|Parse ReflectionSubmitted / AttestationAdded| F[Payload Normalizer & Verifier]
+        F -->|Fetch Content| G[IPFS / Arweave Gateway]
+        F -->|Store / Cache| H[(Local SQLite / LevelDB State)]
+    end
+
+    subgraph EnterpriseIntegrations["Enterprise Event & Notification Pipeline"]
+        F -->|Trigger Digest Alert| I[Resend Email API]
+        F -->|Format Markdown Payload| J[Discord / Slack DevRel Webhook]
+        I -->|HTML Technical Digest| K[Accelerators / Colosseum Mentors]
+        J -->|Rich Embed Card| L[#colosseum-reflections Discord Channel]
+    end

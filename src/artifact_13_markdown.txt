@@ -1,0 +1,12 @@
+1/3 🏛️ Building during the @Colosseum hackathon is a high-velocity sprint, but critical engineering breakthroughs and hard-won post-mortems often get lost in Discord threads.
+
+Introducing Colosseum Chronicle: An on-chain proof-of-build & reflection protocol for @solana founders. 🧵👇
+
+2/3 ⚡ With Chronicle, every architectural pivot, tech breakthrough, and retrospective is cryptographically hashed (SHA-256) and recorded on-chain via Anchor PDAs with peer attestation. 
+
+No more unverifiable pitch decks—just deterministic proof of engineering velocity.
+
+3/3 📡 The best part? Our enterprise daemon bridges on-chain logs to Web2 in real-time, fanning out updates to @Discord, Slack BlockKit, & @resend emails for seamless investor and DevRel syndication.
+
+Ready for production. Built for the Road to Colosseum. 🚀
+Github: https://github.com/colosseum-chronicle/protocol

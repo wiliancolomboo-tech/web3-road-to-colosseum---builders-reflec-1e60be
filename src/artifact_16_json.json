@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ColosseumMilestoneRetrospective",
+  "type": "object",
+  "properties": {
+    "version": { "type": "string", "enum": ["1.0.0"] },
+    "builderPubkey": { "type": "string", "pattern": "^[1-9A-HJ-NP-za-km-z]{32,44}$" },
+    "track": { "type": "string", "enum": ["DeFi", "Payments", "DePIN", "Consumer", "Infrastructure", "Gaming"] },
+    "milestone": { "type": "integer", "minimum": 0 },
+    "retrospective": {
+      "type": "object",
+      "properties": {
+        "technicalWins": { "type": "string" },
+        "criticalBottlenecks": { "type": "string" },
+        "computeUnitProfiling": {
+          "type": "object",
+          "properties": {
+            "initialCU": { "type": "number" },
+            "optimizedCU": { "type": "number" }
+          }
+        },
+        "postMortemLearnings": { "type": "string" }
+      },
+      "required": ["technicalWins", "criticalBottlenecks", "postMortemLearnings"]
+    },
+    "repositoryCommit": { "type": "string", "pattern": "^[a-f0-9]{40}$" }
+  },
+  "required": ["version", "builderPubkey", "track", "milestone", "retrospective", "repositoryCommit"]
+}

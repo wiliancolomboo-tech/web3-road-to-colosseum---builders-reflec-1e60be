@@ -1,0 +1,64 @@
+{
+  "deliverable_id": "superteam_20a1bc1e60be",
+  "opportunity_id": "st-3c12a2d7-88af-40cb-add1-79546e76b8a2",
+  "platform": "SuperteamEarn",
+  "title": "Road to Colosseum | Builders Reflect & Share",
+  "url": "https://earn.superteam.fun/listings/bounty/road-to-colosseum-builders-reflect-and-share",
+  "budget": "1,000 USDC",
+  "prize_amount": 1000.0,
+  "ecosystem": "Solana",
+  "github_url": "https://github.com/wiliancolomboo-tech/web3-road-to-colosseum---builders-reflec-1e60be",
+  "status": "validation_warning",
+  "validation_reports": [
+    {
+      "file": "artifact_01_txt.txt",
+      "language": "txt",
+      "valid": true,
+      "error": null
+    },
+    {
+      "file": "artifact_02_mermaid.txt",
+      "language": "mermaid",
+      "valid": true,
+      "error": null
+    },
+    {
+      "file": "artifact_03_rust.rs",
+      "language": "rust",
+      "valid": true,
+      "error": null
+    },
+    {
+      "file": "artifact_04_typescript.ts",
+      "language": "typescript",
+      "valid": false,
+      "error": "Unclosed bracket '{'"
+    },
+    {
+      "file": "artifact_05_typescript.ts",
+      "language": "typescript",
+      "valid": false,
+      "error": "Unclosed bracket '('"
+    },
+    {
+      "file": "artifact_06_bash.sh",
+      "language": "bash",
+      "valid": true,
+      "error": null
+    },
+    {
+      "file": "artifact_07_dockerfile.txt",
+      "language": "dockerfile",
+      "valid": true,
+      "error": null
+    },
+    {
+      "file": "artifact_08_yaml.yaml",
+      "language": "yaml",
+      "valid": true,
+      "error": null
+    }
+  ],
+  "git_initialized": true,
+  "created_at": "2026-10-12 16:59:06"
+}

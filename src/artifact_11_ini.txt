@@ -1,0 +1,11 @@
+PROGRAM_ID=ChronoZkH9sYgPvZ4tqW8aJ2bE1mXN5k6V8D9c2bF1a4
+SOLANA_RPC_URL=https://api.devnet.solana.com
+SOLANA_WS_URL=wss://api.devnet.solana.com
+ANCHOR_WALLET=./deploy-keypair.json
+
+# Enterprise Broadcast Integrations
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+RESEND_API_KEY=re_123456789_abcdefg
+NOTIFICATION_EMAIL=accelerator@colosseum.org
+PORT=8080

@@ -1,0 +1,12 @@
+# Road to Colosseum: Sprint 3 Architecture Milestone
+**Project:** Colosseum Chronicle  
+**Category:** Technical Infrastructure / Solana Anchor  
+
+## 1. Breakthrough of the Week
+We migrated our state storage model from dynamic vectors to fixed-size PDA derivations (`seeds = [b"milestone", builder.key(), index]`). This reduced instruction compute usage from 84,200 CUs to 14,800 CUs per write.
+
+## 2. Hard-Fought Technical Bug
+Encountered stack exhaustion during multi-account deserialization on Solana v1.18. Solved by implementing Boxed accounts in the Anchor context.
+
+## 3. Road to Colosseum Next Target
+Deploying Helius WebSocket listener daemon for automated Discord and Slack reflection digests for mentor feedback.

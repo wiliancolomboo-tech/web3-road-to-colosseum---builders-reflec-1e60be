@@ -1,0 +1,17 @@
+1/3 🏛️ Hackathons are won by builders who reflect, adapt, and ship at warp speed.
+
+For the "Road to Colosseum | Builders Reflect & Share" bounty, we built @ColosseumEcho: an open-source, on-chain builder milestone retrospective & attestation protocol on @solana. 🧵👇
+
+2/3 ⚡ Under the hood:
+- Anchor-native zero-copy PDA state logging
+- SHA-256 cryptographic commit & retrospective verification
+- Real-time indexing engine streaming to @resend & Discord webhooks
+- Peer-to-peer developer attestations
+
+No lost lessons. Verifiable track records.
+
+3/3 🚀 Turnkey, fully containerized, and backed by a comprehensive QA test suite.
+
+Inspect the smart contract, deploy the daemon in 1 click, or verify your next hackathon milestone on Devnet:
+🔗 GitHub: https://github.com/solana-builders/colosseum-echo
+cc @ColosseumOrg @solana #Solana #RoadToColosseum

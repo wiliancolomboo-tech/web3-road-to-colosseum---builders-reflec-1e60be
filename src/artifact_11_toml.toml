@@ -1,0 +1,23 @@
+[toolchain]
+anchor_version = "0.30.1"
+solana_version = "1.18.26"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+colosseum_reflect = "CRefL5YqR77hQ33YgKkm8r5c76T1yTepR9nJ2RsmhA7G"
+
+[programs.devnet]
+colosseum_reflect = "CRefL5YqR77hQ33YgKkm8r5c76T1yTepR9nJ2RsmhA7G"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-node tests/colosseum-reflect.ts"

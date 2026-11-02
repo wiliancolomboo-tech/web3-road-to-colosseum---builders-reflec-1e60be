@@ -1,0 +1,6 @@
+SOLANA_RPC_URL=https://api.devnet.solana.com
+SOLANA_WS_URL=wss://api.devnet.solana.com
+PROGRAM_ID=ChrncLEv8yX7M6m4aU9vNkWg4x8C6Vz6Y2tF1sQJ3zL
+RESEND_API_KEY=re_123456789abcdef
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+JUDGES_MAILING_LIST=judges@colosseum.org,accelerator@colosseum.org

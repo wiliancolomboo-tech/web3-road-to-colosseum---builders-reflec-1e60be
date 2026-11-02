@@ -1,0 +1,11 @@
+GET /health
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "status": "HEALTHY",
+  "programId": "Chrnc1e111111111111111111111111111111111111",
+  "cluster": "devnet",
+  "uptimeSeconds": 14285,
+  "eventsProcessed": 42
+}

@@ -1,0 +1,11 @@
+# Solana Network Configuration
+PROGRAM_ID=CRP1111111111111111111111111111111111111111
+SOLANA_RPC_URL=https://api.devnet.solana.com
+SOLANA_RPC_WS_URL=wss://api.devnet.solana.com
+HEALTH_PORT=8080
+
+# Enterprise Dispatch API Keys
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+RESEND_API_KEY=re_123456789_abcdefghijklmnopqrstuvwxyz
+NOTIFICATION_EMAIL=accelerator-mentors@colosseum.org

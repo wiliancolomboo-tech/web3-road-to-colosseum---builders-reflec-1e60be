@@ -1,0 +1,7 @@
+3/ Built with @coral_xyz Anchor, zero-unsafe assumptions, full test coverage, and 1-click Docker orchestration.
+
+Inspect our open-source codebase & join the Road to Colosseum:
+🔗 GitHub: https://github.com/solana-chronicle/chronicle-protocol
+📡 Live on Solana Devnet
+
+Special shoutout to @solana & @ColosseumOrg for inspiring the next wave of frontier builders! 🚀

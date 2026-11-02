@@ -1,0 +1,7 @@
+3/4 🌟 Earn immutable builder reputation, give and receive peer audit attestations, and give hackathon judges authentic proof of your engineering velocity.
+
+Built for the Solana ecosystem. 
+
+Inspect the contract & deploy today: https://github.com/solana-developers/colosseum-chronicle
+
+#Solana #Colosseum #BuildInPublic @solana

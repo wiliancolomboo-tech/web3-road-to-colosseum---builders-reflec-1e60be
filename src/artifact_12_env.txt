@@ -1,0 +1,8 @@
+PORT=8080
+SOLANA_RPC_HTTP=https://api.devnet.solana.com
+SOLANA_RPC_WS=wss://api.devnet.solana.com
+PROGRAM_ID=ChrncLEvP3oUu1a6FzK9xT5hM8G2q8mH6W4uQ4B6C9pZ
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+RESEND_API_KEY=re_123456789abcdef
+INVESTOR_ALERT_EMAIL=evaluators@colosseum.org

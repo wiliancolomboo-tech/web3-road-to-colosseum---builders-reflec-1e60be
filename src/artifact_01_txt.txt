@@ -1,9 +1,11 @@
-+-----------------------------------------------------------------------------------------+
-|                                  COLOSSEUM_REFLECT CORE                                 |
-|                                                                                         |
-|   +-----------------------+     +-----------------------+     +---------------------+   |
-|   |  Milestone Pipeline   | --> | Conviction Attestation| --> | Soulbound Badge Mnt |   |
-|   |  - PDA Commit Roots   |     | - Stake-Weighted Math |     | - Token-2022 CPI    |   |
-|   |  - Temporal Lockouts  |     | - Quadratic Anti-Sybil|     | - Metadata Extensions|  |
-|   +-----------------------+     +-----------------------+     +---------------------+   |
-+-----------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------+
+|                                  COLOSSEUM CHRONICLE ECOSYSTEM                                    |
+|                                                                                                   |
+|   [ Solana Devnet / Mainnet ]                               [ Off-Chain Enterprise Agent ]         |
+|   +--------------------------+                              +----------------------------+        |
+|   |   Chronicle Anchor Prog  |  WebSocket Event Stream      |   Colosseum Worker Daemon  |        |
+|   |   - Builder Profile PDA  |============================> |   - Resend API (Emails)    |        |
+|   |   - Milestone PDA        |  `MilestonePublishedEvent`   |   - Discord Webhook Relays |        |
+|   |   - Peer Attestation PDA |                              |   - Slack Exec Digest      |        |
+|   +--------------------------+                              +----------------------------+        |
++---------------------------------------------------------------------------------------------------+

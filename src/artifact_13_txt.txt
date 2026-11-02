@@ -1,0 +1,5 @@
+3/3 🚀 Turnkey, fully tested (100% assertion pass rate), and dockerized for the entire @ColosseumOrg community.
+
+Let's turn hackathon reflections into permanent on-chain developer pedigree.
+
+Inspect the code & deploy today: https://github.com/solana-developers/colosseum-chronicle #Solana #Colosseum #SolanaBuilders

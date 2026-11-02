@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  colomirror-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: colomirror-syndication-sentinel
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - PROGRAM_ID=ColoM1rr0r1111111111111111111111111111111111
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - MENTOR_ALERT_EMAIL=${MENTOR_ALERT_EMAIL:-mentors@colosseum.org}
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "node -e 'process.exit(0)'"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

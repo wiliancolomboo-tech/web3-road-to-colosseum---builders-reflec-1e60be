@@ -1,0 +1,7 @@
+SOLANA_RPC_URL=https://api.devnet.solana.com
+SOLANA_RPC_WS_URL=wss://api.devnet.solana.com
+CHRONO_PROGRAM_ID=ChronoRef1ect111111111111111111111111111111
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+RESEND_API_KEY=re_your_api_key_here
+MENTOR_NOTIFICATION_EMAIL=accelerator-scouts@colosseum.org

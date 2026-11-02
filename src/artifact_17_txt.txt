@@ -1,0 +1,9 @@
+3/3 🚀 For builders: Your permanent, on-chain Web3 engineering resume.
+For @Colosseum accelerator scouts: Instant, verifiable velocity telemetry on the ecosystem’s top 1% devs.
+
+Built with Anchor 0.30.1, full test coverage, and turnkey Docker orchestration.
+
+Inspect the code & start chronicling:
+github.com/solana-chronicle/chronicle-engine
+
+#RoadToColosseum #Solana #Buidl

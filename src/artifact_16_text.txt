@@ -1,0 +1,5 @@
+🚨 What happens to your hackathon learnings once the Colosseum judging window closes?
+
+Most retrospectives, technical breakthroughs, and benchmarks disappear into forgotten Discord threads.
+
+We built @ColosseumOrg Chronicle (C3 Protocol): Cryptographic, on-chain proof of shipping on @solana. 🧵👇

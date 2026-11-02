@@ -1,0 +1,23 @@
+{
+  "name": "colosseum-chronicle-worker",
+  "version": "1.0.0",
+  "description": "Enterprise Event Ingestion & Webhook/Email Broadcaster for Colosseum Chronicle",
+  "main": "dist/indexer_and_notifier.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/indexer_and_notifier.js",
+    "dev": "ts-node src/indexer_and_notifier.ts"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.30.1",
+    "@solana/web3.js": "^1.95.3",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "resend": "^3.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}

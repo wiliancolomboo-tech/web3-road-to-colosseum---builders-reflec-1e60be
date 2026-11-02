@@ -1,0 +1,5 @@
+1/ Building in the arena during @Colosseum hackathons transforms developers into battle-tested architects. 🏛️
+
+Yet, critical post-mortems, CU optimizations, and architectural breakthroughs disappear into Discord history.
+
+Introducing RetroPulse: Verifiable, On-Chain Reflections for Solana Builders. 👇

@@ -1,0 +1,8 @@
+3/8 Verified grit > marketing claims.
+The road to the accelerator is paved in code, not vaporware.
+
+Built with complete Anchor contracts, a turnkey CLI, and Docker pipelines ready to roll:
+💻 GitHub: github.com/solana-builders/colosseum-chronicle
+🚀 Track: Infrastructure / Developer Tooling
+
+Let's ship! @Solana @Colosseum #Solana #RoadToColosseum #SolanaBuilders

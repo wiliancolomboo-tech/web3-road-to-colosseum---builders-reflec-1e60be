@@ -1,0 +1,5 @@
+2/4 ⚡ Colosseum Chronicle turns hackathon sprints into verifiable, on-chain Proof-of-Build.
+
+Builders anchor SHA-256 milestone retrospectives directly into Solana PDAs. Our low-latency daemon streams verified progress to Discord, Slack & mentors via @resend in real-time.
+
+Sub-cent auditing on @solana.

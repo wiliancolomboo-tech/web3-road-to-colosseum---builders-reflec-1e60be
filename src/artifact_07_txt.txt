@@ -1,0 +1,6 @@
+---
+
+# 6. Sponsor Handover & Turnkey Operations
+
+### 6.1 Deployment Commands
+Execute the complete compilation, verification, and deployment pipeline using standard Solana and Anchor tools:

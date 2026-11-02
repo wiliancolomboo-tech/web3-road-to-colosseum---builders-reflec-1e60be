@@ -1,0 +1,6 @@
+Judging shouldn’t just evaluate slides; it should evaluate grit and verifiable velocity.
+
+Built with 100% production-ready Anchor Rust, complete with Dockerized relayers & enterprise notification pipelines.
+
+Code & runbook are live: https://github.com/solana-labs/colosseum-echo
+#Solana #Colosseum #BuildInPublic @solana
