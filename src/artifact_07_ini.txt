@@ -1,6 +1,6 @@
 SOLANA_RPC_URL=https://api.devnet.solana.com
 CHRONICLE_PROGRAM_ID=ChrncLE88bV3WpXQ87yR5zQeU1hF5Vj8kLmN9PxBvW2q
-RESEND_API_KEY=re_your_api_key_here
+RESEND_API_KEY=re_test_000000000000000000000000
 DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
 PARTNER_EMAIL=accelerator@colosseum.org
 PORT=8080

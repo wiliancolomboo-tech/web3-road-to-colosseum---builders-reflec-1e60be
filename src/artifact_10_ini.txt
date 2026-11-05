@@ -5,5 +5,5 @@ PROGRAM_ID=Ref1ect111111111111111111111111111111111111
 
 # Enterprise Integrations
 DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
-RESEND_API_KEY=re_123456789_abcdefghijklmnopqrstuvwxyz
+RESEND_API_KEY=re_test_000000000000000000000000
 MENTOR_RECIPIENT_EMAIL=hackathons@colosseum.org

@@ -22,7 +22,7 @@ const config: DaemonConfig = {
   rpcUrl: process.env.SOLANA_RPC_URL || "https://api.devnet.solana.com",
   wsUrl: process.env.SOLANA_WS_URL || "wss://api.devnet.solana.com",
   programId: process.env.PROGRAM_ID || "ChrncLE7kYd3ZUXxWz3C3rW2Lq2TKn8u1E9V3X5vYFzM",
-  resendApiKey: process.env.RESEND_API_KEY || "re_test_dummy_key",
+  resendApiKey: process.env.RESEND_API_KEY || "re_test_000000000000000000000000",
   recipientEmail: process.env.RECIPIENT_EMAIL || "founders@colosseum.org",
   discordWebhookUrl: process.env.DISCORD_WEBHOOK_URL || "",
   slackWebhookUrl: process.env.SLACK_WEBHOOK_URL || "",

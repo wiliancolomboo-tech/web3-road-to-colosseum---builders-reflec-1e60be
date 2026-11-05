@@ -10,7 +10,7 @@
       "name": "initialize_protocol",
       "discriminator": [245, 175, 231, 225, 193, 82, 212, 134],
       "accounts": [
-        { "name": "config", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [99, 104, 114, 111, 110, 105, 99, 108, 101, 95, 99, 111, 110, 102, 105, 103] }] } },
+        { "name": "config", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [1, 2, 3, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }] } },
         { "name": "authority", "writable": true, "signer": true },
         { "name": "system_program", "address": "11111111111111111111111111111111" }
       ],

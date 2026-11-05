@@ -11,5 +11,5 @@ PIVOT_COUNT="2"
 # External Enterprise Notification Channels
 DISCORD_WEBHOOK_URL="https://api.example.com/webhooks/alerts/placeholder"
 SLACK_WEBHOOK_URL="https://api.example.com/webhooks/alerts/placeholder"
-RESEND_API_KEY="re_123456789_abcdefghijklmnopqrstuvwx"
+RESEND_API_KEY="re_test_000000000000000000000000"
 SCOUT_NOTIFICATION_EMAIL="scouts@colosseum.org"

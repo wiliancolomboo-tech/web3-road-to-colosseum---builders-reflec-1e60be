@@ -1,6 +1,6 @@
 PORT=8080
 SOLANA_RPC_URL=https://api.devnet.solana.com
 CHRONICLE_PROGRAM_ID=Chron1cLe11111111111111111111111111111111111
-RESEND_API_KEY=re_123456789_abcdefg
+RESEND_API_KEY=re_test_000000000000000000000000
 MENTOR_NOTIFICATION_EMAIL=accelerator@colosseum.org
 SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
